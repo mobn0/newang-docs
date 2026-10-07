@@ -483,7 +483,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       {
         title: 'Tones',
         description: 'Six matte tones.',
-        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.0.4</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
+        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.1.0</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
       },
     ],
     api: [{ name: 'tone', type: "'lime' | 'neutral' | 'success' | 'warning' | 'danger' | 'info'", default: "'neutral'", description: 'Badge tone.' }],
@@ -494,7 +494,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     name: 'Alert',
     selector: 'na-alert',
     area: 'Display',
-    description: 'Matte status banner with optional title.',
+    description: 'Matte status banner with tone-colored title. No side bar, no background wash.',
     whenToUse: 'Form errors, deprecation notices, zero-CSS rule callouts.',
     zeroCssRule: 'Use tone + title inputs — no alert stylesheets.',
     demos: [

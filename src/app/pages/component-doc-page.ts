@@ -329,7 +329,7 @@ import { ApiTable } from '../shared/api-table';
               @case ('badge') {
                 <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
                   <na-row gap="md">
-                    <na-badge tone="lime">v1.0.4</na-badge>
+                    <na-badge tone="lime">v1.1.0</na-badge>
                     <na-badge tone="neutral">draft</na-badge>
                     <na-badge tone="success">live</na-badge>
                     <na-badge tone="warning">beta</na-badge>

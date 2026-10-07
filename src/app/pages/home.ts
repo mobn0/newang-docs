@@ -35,7 +35,7 @@ import { CodeBlock } from '../shared/code-block';
         <na-stack gap="md">
           <na-row gap="md" align="center">
             <na-heading level="1">newAng</na-heading>
-            <na-badge tone="lime">v1.0.4</na-badge>
+            <na-badge tone="lime">v1.1.0</na-badge>
             <na-badge tone="neutral">dark-only</na-badge>
           </na-row>
           <na-text size="lg" tone="muted">
@@ -54,7 +54,7 @@ import { CodeBlock } from '../shared/code-block';
 
         <na-grid cols="3" gap="md">
           <na-card title="Dark by default" subtitle="One theme, done right">
-            <na-text tone="muted">Soft green-charcoal surfaces, warm off-white text. No light-mode branches to maintain.</na-text>
+            <na-text tone="muted">Neutral charcoal surfaces, soft off-white text. No light-mode branches to maintain.</na-text>
           </na-card>
           <na-card title="Flat & static" subtitle="Borders, not shadows">
             <na-text tone="muted">1px borders for elevation. Focus is a 2px lime outline. Gradients and glows are banned.</na-text>
