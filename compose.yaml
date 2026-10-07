@@ -1,0 +1,8 @@
+# Coolify: point at this repo, set domain to newang.noecore.com.
+# TLS + reverse proxy are handled by Coolify — the service just serves :80.
+services:
+  docs:
+    build: .
+    restart: unless-stopped
+    expose:
+      - '80'

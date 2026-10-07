@@ -1,0 +1,54 @@
+<na-app>
+  <div class="docs-shell">
+    <na-header title="newAng" subtitle="Opinionated dark Angular components">
+      <na-row gap="md" align="center">
+        <na-badge tone="lime">v1.0.4</na-badge>
+        <na-link href="https://github.com/mobn0/newang">GitHub</na-link>
+        <a routerLink="/docs/install" style="text-decoration:none">
+          <na-button variant="primary" size="sm">Get started</na-button>
+        </a>
+      </na-row>
+    </na-header>
+
+    <na-split columns="280px 1fr">
+      <div class="docs-sidebar">
+        <input
+          naInput
+          placeholder="Search components…"
+          [value]="query()"
+          (input)="onSearch($event)"
+        />
+        @for (group of filtered(); track group.title) {
+          <div class="docs-nav-group">{{ group.title }}</div>
+          @for (item of group.items; track item.slug) {
+            <a
+              class="docs-nav-link"
+              [routerLink]="item.slug === '' ? '/' : '/' + item.slug"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              {{ item.label }}
+              @if (item.selector) {
+                <na-text tone="faint" size="sm"> · {{ item.selector }}</na-text>
+              }
+            </a>
+          }
+        } @empty {
+          <na-text tone="muted" size="sm">No matches.</na-text>
+        }
+      </div>
+
+      <div class="docs-main">
+        <div class="docs-content">
+          <router-outlet />
+        </div>
+      </div>
+    </na-split>
+
+    <na-footer>
+      <na-text tone="muted" size="sm">
+        MIT · newAng docs · Built only with na-* components · newang.noecore.com
+      </na-text>
+    </na-footer>
+  </div>
+</na-app>

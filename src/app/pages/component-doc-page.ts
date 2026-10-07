@@ -1,0 +1,546 @@
+import { Component, computed, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
+import {
+  NaAlert,
+  NaAvatar,
+  NaBadge,
+  NaBreadcrumbs,
+  NaButton,
+  NaCard,
+  NaCheckbox,
+  NaCode,
+  NaDivider,
+  NaEmptyState,
+  NaField,
+  NaFooter,
+  NaForm,
+  NaGrid,
+  NaHeader,
+  NaHeading,
+  NaInput,
+  NaLink,
+  NaList,
+  NaModal,
+  NaPage,
+  NaProgress,
+  NaRadioGroup,
+  NaRow,
+  NaSpacer,
+  NaSpinner,
+  NaSplit,
+  NaStack,
+  NaSwitch,
+  NaTable,
+  NaTabs,
+  NaText,
+  NaToolbar,
+  NaTooltip,
+} from 'newang';
+import { COMPONENT_DOCS } from '../data/component-docs';
+import { DemoCard } from '../shared/demo-card';
+import { CodeBlock } from '../shared/code-block';
+import { ApiTable } from '../shared/api-table';
+
+@Component({
+  imports: [
+    RouterLink,
+    NaAlert,
+    NaAvatar,
+    NaBadge,
+    NaBreadcrumbs,
+    NaButton,
+    NaCard,
+    NaCheckbox,
+    NaCode,
+    NaDivider,
+    NaEmptyState,
+    NaField,
+    NaFooter,
+    NaForm,
+    NaGrid,
+    NaHeader,
+    NaHeading,
+    NaInput,
+    NaLink,
+    NaList,
+    NaModal,
+    NaPage,
+    NaProgress,
+    NaRadioGroup,
+    NaRow,
+    NaSpacer,
+    NaSpinner,
+    NaSplit,
+    NaStack,
+    NaSwitch,
+    NaTable,
+    NaTabs,
+    NaText,
+    NaToolbar,
+    NaTooltip,
+    DemoCard,
+    CodeBlock,
+    ApiTable,
+  ],
+  template: `
+    @if (doc(); as d) {
+      <na-page maxWidth="md">
+        <na-stack gap="lg">
+          <na-stack gap="md">
+            <na-breadcrumbs [items]="['Components', d.area, d.name]" />
+            <na-row gap="md" align="center">
+              <na-heading level="1">{{ d.name }}</na-heading>
+              <na-badge tone="neutral">{{ d.selector }}</na-badge>
+            </na-row>
+            <na-text size="lg" tone="muted">{{ d.description }}</na-text>
+            <na-alert tone="info" title="When to use">{{ d.whenToUse }}</na-alert>
+            <na-alert tone="success" title="Zero-CSS rule">{{ d.zeroCssRule }}</na-alert>
+          </na-stack>
+
+          <na-stack gap="md">
+            <na-heading level="2">Examples</na-heading>
+            @switch (d.slug) {
+              @case ('button') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-row gap="md">
+                    <na-button variant="primary">Save</na-button>
+                    <na-button variant="secondary">Cancel</na-button>
+                    <na-button variant="ghost">Later</na-button>
+                    <na-button variant="danger">Delete</na-button>
+                  </na-row>
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[1].title" [description]="d.demos[1].description" [code]="d.demos[1].code">
+                  <na-stack gap="md">
+                    <na-row gap="md">
+                      <na-button size="sm">Small</na-button>
+                      <na-button size="md">Medium</na-button>
+                      <na-button size="lg">Large</na-button>
+                    </na-row>
+                    <na-row gap="md">
+                      <na-button disabled>Disabled</na-button>
+                      <na-button loading>Loading</na-button>
+                    </na-row>
+                    <na-button fullWidth>Full width</na-button>
+                  </na-stack>
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[2].title" [description]="d.demos[2].description" [code]="d.demos[2].code">
+                  <na-row gap="md" align="center">
+                    <na-button variant="primary" (pressed)="pressCount.set(pressCount() + 1)">Save changes</na-button>
+                    <na-text tone="muted" size="sm">Pressed {{ pressCount() }}×</na-text>
+                  </na-row>
+                </docs-demo-card>
+              }
+              @case ('field') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-field label="Email" hint="Work email">
+                    <input naInput placeholder="you@co.com" />
+                  </na-field>
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[1].title" [description]="d.demos[1].description" [code]="d.demos[1].code">
+                  <na-stack gap="md">
+                    <na-field label="Password" error="Minimum 8 characters" required>
+                      <input naInput invalid type="password" placeholder="••••••••" />
+                    </na-field>
+                    <na-field label="Notes" hint="Anything we should know?">
+                      <textarea naInput rows="3"></textarea>
+                    </na-field>
+                  </na-stack>
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[2].title" [description]="d.demos[2].description" [code]="d.demos[2].code">
+                  <na-field label="Plan" hint="Billed monthly">
+                    <select naInput>
+                      <option>Free</option>
+                      <option>Pro</option>
+                    </select>
+                  </na-field>
+                </docs-demo-card>
+              }
+              @case ('form') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-form submitLabel="Login" (submitted)="formMsg.set('Submitted! (demo)')">
+                    <na-field label="Email" required>
+                      <input naInput placeholder="you@co.com" />
+                    </na-field>
+                    <na-field label="Password" required>
+                      <input naInput type="password" />
+                    </na-field>
+                  </na-form>
+                  @if (formMsg()) { <na-text tone="accent" size="sm">{{ formMsg() }}</na-text> }
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[1].title" [description]="d.demos[1].description" [code]="d.demos[1].code">
+                  <na-form submitLabel="Save" showCancel (submitted)="formMsg.set('Saved!')" (cancelled)="formMsg.set('Cancelled.')">
+                    <na-field label="Name">
+                      <input naInput placeholder="Project name" />
+                    </na-field>
+                  </na-form>
+                  @if (formMsg()) { <na-text tone="accent" size="sm">{{ formMsg() }}</na-text> }
+                </docs-demo-card>
+              }
+              @case ('switch') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-switch label="Email alerts" [(checked)]="switchOn" />
+                    <na-text tone="muted" size="sm">Alerts are {{ switchOn() ? 'on' : 'off' }}.</na-text>
+                  </na-stack>
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[1].title" [description]="d.demos[1].description" [code]="d.demos[1].code">
+                  <na-switch label="Locked by admin" disabled />
+                </docs-demo-card>
+              }
+              @case ('checkbox') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-checkbox label="Remember me" [(checked)]="remember" />
+                    <na-checkbox label="Subscribe to changelog" [(checked)]="news" />
+                    <na-text tone="muted" size="sm">remember={{ remember() }}, news={{ news() }}</na-text>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('radio-group') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-radio-group
+                      label="Plan"
+                      [options]="[{ value: 'free', label: 'Free' }, { value: 'pro', label: 'Pro' }]"
+                      [(value)]="plan"
+                    />
+                    <na-text tone="muted" size="sm">Selected: {{ plan() }}</na-text>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('app') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-alert tone="success" title="You are inside one">This docs site renders within a single na-app at the root.</na-alert>
+                </docs-demo-card>
+              }
+              @case ('page') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-text tone="muted">This page is wrapped in <na-code>na-page maxWidth="md"</na-code>. Try resizing — gutters stay consistent.</na-text>
+                </docs-demo-card>
+              }
+              @case ('stack') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="lg">
+                    <na-heading level="2">Sign in</na-heading>
+                    <na-field label="Email">
+                      <input naInput placeholder="you@co.com" />
+                    </na-field>
+                    <na-button variant="primary">Login</na-button>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('row') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-row gap="md" align="center" justify="between">
+                    <na-heading level="3">Members</na-heading>
+                    <na-button variant="primary">Invite</na-button>
+                  </na-row>
+                </docs-demo-card>
+              }
+              @case ('grid') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-grid cols="3" gap="md">
+                    <na-card title="Free">Hobby projects</na-card>
+                    <na-card title="Pro">Teams</na-card>
+                    <na-card title="Scale">Platforms</na-card>
+                  </na-grid>
+                </docs-demo-card>
+              }
+              @case ('split') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-split columns="280px 1fr">
+                    <na-text tone="muted">Sidebar</na-text>
+                    <na-text>Content</na-text>
+                  </na-split>
+                </docs-demo-card>
+              }
+              @case ('divider') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-text>Above</na-text>
+                    <na-divider />
+                    <na-text>Below</na-text>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('spacer') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-row gap="md">
+                    <na-text>Left</na-text>
+                    <na-spacer />
+                    <na-text>Right</na-text>
+                  </na-row>
+                </docs-demo-card>
+              }
+              @case ('heading') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-heading level="1">Page title</na-heading>
+                    <na-heading level="2">Section</na-heading>
+                    <na-heading level="3">Subsection</na-heading>
+                    <na-heading level="4">Detail</na-heading>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('text') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-text>Default body copy.</na-text>
+                    <na-text tone="muted">Secondary information.</na-text>
+                    <na-text tone="faint" size="sm">Caption / metadata.</na-text>
+                    <na-text tone="accent">Lime highlight.</na-text>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('link') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-text>Read the <na-link href="/docs/theme">theme guide</na-link> first.</na-text>
+                </docs-demo-card>
+              }
+              @case ('code') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-text>Set <na-code>variant="primary"</na-code> for the main action.</na-text>
+                </docs-demo-card>
+              }
+              @case ('empty-state') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-empty-state title="No members yet" description="Invite your team to get started.">
+                    <na-button variant="primary">Invite</na-button>
+                  </na-empty-state>
+                </docs-demo-card>
+              }
+              @case ('card') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-card title="Pro plan" subtitle="For teams">
+                    <na-text>$20 / seat / month.</na-text>
+                  </na-card>
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[1].title" [description]="d.demos[1].description" [code]="d.demos[1].code">
+                  <na-card title="Billing">
+                    <na-stack gap="md">
+                      <na-text tone="muted">Next invoice May 1.</na-text>
+                      <na-button variant="primary">Pay now</na-button>
+                    </na-stack>
+                  </na-card>
+                </docs-demo-card>
+              }
+              @case ('badge') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-row gap="md">
+                    <na-badge tone="lime">v1.0.4</na-badge>
+                    <na-badge tone="neutral">draft</na-badge>
+                    <na-badge tone="success">live</na-badge>
+                    <na-badge tone="warning">beta</na-badge>
+                    <na-badge tone="danger">down</na-badge>
+                    <na-badge tone="info">new</na-badge>
+                  </na-row>
+                </docs-demo-card>
+              }
+              @case ('alert') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-alert tone="info" title="Heads up">New version available.</na-alert>
+                    <na-alert tone="success" title="Saved">Changes are live.</na-alert>
+                    <na-alert tone="warning" title="Careful">This affects billing.</na-alert>
+                    <na-alert tone="danger" title="Failed">Could not save.</na-alert>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('table') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-table
+                      [columns]="[{ key: 'name', header: 'Name' }, { key: 'plan', header: 'Plan' }]"
+                      [rows]="tableRows()"
+                      emptyMessage="No members yet"
+                    />
+                    <na-row gap="md">
+                      <na-button variant="secondary" size="sm" (pressed)="toggleTableRows()">Toggle empty state</na-button>
+                    </na-row>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('list') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-list>
+                    <na-row gap="md" align="center" justify="between">
+                      <na-text>Notifications</na-text>
+                      <na-switch [(checked)]="switchOn" />
+                    </na-row>
+                    <na-row gap="md" align="center" justify="between">
+                      <na-text>Marketing email</na-text>
+                      <na-switch [(checked)]="news" />
+                    </na-row>
+                  </na-list>
+                </docs-demo-card>
+              }
+              @case ('breadcrumbs') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-breadcrumbs [items]="['Docs', 'Components', 'Button']" />
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[1].title" [description]="d.demos[1].description" [code]="d.demos[1].code">
+                  <na-breadcrumbs
+                    [items]="[
+                      { label: 'Docs', href: '/docs/install' },
+                      { label: 'Components', href: '/components/button' },
+                      'Button',
+                    ]"
+                  />
+                </docs-demo-card>
+              }
+              @case ('avatar') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-row gap="md" align="center">
+                    <na-avatar name="Ada Lovelace" size="sm" />
+                    <na-avatar name="Ada Lovelace" size="md" />
+                    <na-avatar name="Grace Hopper" size="lg" />
+                  </na-row>
+                </docs-demo-card>
+                <docs-demo-card [title]="d.demos[1].title" [description]="d.demos[1].description" [code]="d.demos[1].code">
+                  <na-avatar name="Ada Lovelace" src="/avatar.jpg" />
+                </docs-demo-card>
+              }
+              @case ('spinner') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-spinner label="Loading members…" />
+                </docs-demo-card>
+              }
+              @case ('progress') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-progress [value]="progress()" />
+                    <na-row gap="md" align="center">
+                      <na-button variant="secondary" size="sm" (pressed)="progress.set(Math.max(0, progress() - 10))">−10</na-button>
+                      <na-button variant="secondary" size="sm" (pressed)="progress.set(Math.min(100, progress() + 10))">+10</na-button>
+                      <na-text tone="muted" size="sm">{{ progress() }}%</na-text>
+                    </na-row>
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('modal') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-button variant="danger" (pressed)="modalOpen.set(true)">Delete</na-button>
+                  <na-modal title="Delete project?" [open]="modalOpen()" (closed)="modalOpen.set(false)">
+                    <na-stack gap="md">
+                      <na-text>This cannot be undone.</na-text>
+                      <na-row gap="md">
+                        <na-button variant="danger" (pressed)="modalOpen.set(false)">Delete</na-button>
+                        <na-button variant="secondary" (pressed)="modalOpen.set(false)">Cancel</na-button>
+                      </na-row>
+                    </na-stack>
+                  </na-modal>
+                </docs-demo-card>
+              }
+              @case ('tabs') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-stack gap="md">
+                    <na-tabs [tabs]="['HTML', 'API']" [(active)]="tabIndex" />
+                    @if (tabIndex() === 0) {
+                      <na-code>markup goes here</na-code>
+                    } @else {
+                      <na-text tone="muted">props go here</na-text>
+                    }
+                  </na-stack>
+                </docs-demo-card>
+              }
+              @case ('tooltip') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-button variant="secondary" naTooltip="Saved to drafts">Hover me</na-button>
+                </docs-demo-card>
+              }
+              @case ('header') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-header title="Billing" subtitle="Invoices and seats">
+                    <na-button variant="primary">Pay now</na-button>
+                  </na-header>
+                </docs-demo-card>
+              }
+              @case ('footer') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-footer>
+                    <na-text tone="muted" size="sm">MIT · newAng docs</na-text>
+                  </na-footer>
+                </docs-demo-card>
+              }
+              @case ('toolbar') {
+                <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
+                  <na-toolbar>
+                    <input naInput placeholder="Search members…" />
+                    <na-spacer />
+                    <na-button variant="primary">Invite</na-button>
+                  </na-toolbar>
+                </docs-demo-card>
+              }
+              @default {
+                @for (demo of d.demos; track demo.title) {
+                  <docs-code-block [code]="demo.code" />
+                }
+              }
+            }
+          </na-stack>
+
+          <na-stack gap="md">
+            <na-heading level="2">API</na-heading>
+            <docs-api-table [rows]="d.api" />
+          </na-stack>
+
+          @if (d.donts.length) {
+            <na-stack gap="md">
+              <na-heading level="2">Do / Don't</na-heading>
+              <na-grid cols="2" gap="md">
+                <na-alert tone="success" title="Do">{{ d.zeroCssRule }}</na-alert>
+                @for (dont of d.donts; track dont) {
+                  <na-alert tone="warning" title="Don't">{{ dont }}</na-alert>
+                }
+              </na-grid>
+            </na-stack>
+          }
+        </na-stack>
+      </na-page>
+    } @else {
+      <na-page maxWidth="md">
+        <na-empty-state title="Not found" description="This component page does not exist yet.">
+          <a routerLink="/" style="text-decoration:none"><na-button variant="primary">Back home</na-button></a>
+        </na-empty-state>
+      </na-page>
+    }
+  `,
+})
+export class ComponentDocPage {
+  private readonly route = inject(ActivatedRoute);
+  protected readonly Math = Math;
+
+  private readonly slug = toSignal(
+    this.route.paramMap.pipe(map((p) => p.get('slug') ?? '')),
+    { initialValue: '' },
+  );
+
+  protected readonly doc = computed(() => COMPONENT_DOCS[this.slug()]);
+
+  // ── Interactive demo state (signals; zoneless-safe) ──
+  protected readonly pressCount = signal(0);
+  protected readonly formMsg = signal('');
+  protected readonly switchOn = signal(true);
+  protected readonly remember = signal(true);
+  protected readonly news = signal(false);
+  protected readonly plan = signal<string | number | undefined>('pro');
+  protected readonly modalOpen = signal(false);
+  protected readonly tabIndex = signal(0);
+  protected readonly progress = signal(35);
+  protected readonly tableFull = signal(true);
+
+  protected readonly tableRows = computed(() =>
+    this.tableFull()
+      ? [
+          { name: 'Ada', plan: 'Pro' },
+          { name: 'Grace', plan: 'Free' },
+        ]
+      : [],
+  );
+
+  protected toggleTableRows(): void {
+    this.tableFull.update((v) => !v);
+  }
+}
