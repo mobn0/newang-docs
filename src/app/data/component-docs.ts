@@ -483,7 +483,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       {
         title: 'Tones',
         description: 'Six matte tones.',
-        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.3.1</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
+        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.3.2</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
       },
     ],
     api: [{ name: 'tone', type: "'lime' | 'neutral' | 'success' | 'warning' | 'danger' | 'info'", default: "'neutral'", description: 'Badge tone.' }],
@@ -702,7 +702,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     name: 'Header',
     selector: 'na-header',
     area: 'Shell',
-    description: 'App top bar with 16px side gutters. Title + subtitle inputs, actions projected and vertically centered. Stacks below 768px; long titles wrap instead of overflowing.',
+    description: 'App top bar with 16px edge padding and no outer margins — in the header → page → footer composition, section gaps come from na-page padding alone, never doubled. Actions vertically centered; stacks below 768px; long titles wrap.',
     whenToUse: 'Top of every authenticated page or the docs shell.',
     zeroCssRule: 'Use title/subtitle — no header layout CSS. Set maxWidth to align shell content with na-page gutters.',
     demos: [
@@ -729,7 +729,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     name: 'Footer',
     selector: 'na-footer',
     area: 'Shell',
-    description: 'Muted footer bar with 16px side gutters. Project links and copy inside.',
+    description: 'Muted footer bar with 16px edge padding and no outer margins — section gaps come from na-page padding alone. Project links and copy inside.',
     whenToUse: 'Bottom of app shell and docs pages.',
     zeroCssRule: 'Wrap footer content — do not style footers manually. Set maxWidth to align with na-page.',
     demos: [
