@@ -217,7 +217,7 @@ import { ApiTable } from '../shared/api-table';
               }
               @case ('page') {
                 <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
-                  <na-text tone="muted">This page is wrapped in <na-code>na-page maxWidth="md"</na-code>. Try resizing — gutters stay consistent.</na-text>
+                  <na-text tone="muted">This page uses a medium page column. Try resizing — gutters stay consistent.</na-text>
                 </docs-demo-card>
               }
               @case ('stack') {
@@ -301,7 +301,7 @@ import { ApiTable } from '../shared/api-table';
               }
               @case ('code') {
                 <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
-                  <na-text>Set <na-code>variant="primary"</na-code> for the main action.</na-text>
+                  <na-text>Set the variant input to "primary" for the main action.</na-text>
                 </docs-demo-card>
               }
               @case ('empty-state') {
@@ -329,7 +329,7 @@ import { ApiTable } from '../shared/api-table';
               @case ('badge') {
                 <docs-demo-card [title]="d.demos[0].title" [description]="d.demos[0].description" [code]="d.demos[0].code">
                   <na-row gap="md">
-                    <na-badge tone="lime">v1.2.0</na-badge>
+                    <na-badge tone="lime">v1.2.1</na-badge>
                     <na-badge tone="neutral">draft</na-badge>
                     <na-badge tone="success">live</na-badge>
                     <na-badge tone="warning">beta</na-badge>
@@ -399,7 +399,10 @@ import { ApiTable } from '../shared/api-table';
                   </na-row>
                 </docs-demo-card>
                 <docs-demo-card [title]="d.demos[1].title" [description]="d.demos[1].description" [code]="d.demos[1].code">
-                  <na-avatar name="Ada Lovelace" src="/avatar.jpg" />
+                  <na-avatar
+                    name="Ada Lovelace"
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Crect width='72' height='72' fill='%23cdea7f'/%3E%3Ctext x='36' y='46' font-family='sans-serif' font-size='28' font-weight='bold' text-anchor='middle' fill='%231a1a1a'%3EAL%3C/text%3E%3C/svg%3E"
+                  />
                 </docs-demo-card>
               }
               @case ('spinner') {

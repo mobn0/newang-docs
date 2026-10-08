@@ -35,7 +35,7 @@ import { CodeBlock } from '../shared/code-block';
         <na-stack gap="md">
           <na-row gap="md" align="center">
             <na-heading level="1">newAng</na-heading>
-            <na-badge tone="lime">v1.2.0</na-badge>
+            <na-badge tone="lime">v1.2.1</na-badge>
             <na-badge tone="neutral">dark-only</na-badge>
           </na-row>
           <na-text size="lg" tone="muted">
@@ -60,7 +60,7 @@ import { CodeBlock } from '../shared/code-block';
             <na-text tone="muted">1px borders for elevation. Focus is a 2px lime outline. Gradients and glows are banned.</na-text>
           </na-card>
           <na-card title="Inputs, not CSS" subtitle="Zero consumer stylesheets">
-            <na-text tone="muted">Spacing, type and layout live in <na-code>gap</na-code>, <na-code>tone</na-code>, <na-code>variant</na-code> inputs.</na-text>
+            <na-text tone="muted">Spacing, type and layout live in gap, tone and variant inputs.</na-text>
           </na-card>
         </na-grid>
 
@@ -75,7 +75,7 @@ import { CodeBlock } from '../shared/code-block';
           <na-text tone="muted">
             Every component page follows the same NG-ZORRO-style recipe: when to use it, isolated live
             demos you can interact with, copy-paste code, a full API table, and do / don't rules.
-            This site itself is built only with <na-code>na-*</na-code> components.
+            This site itself is built only with NewAng components.
           </na-text>
           <na-row gap="md">
             <a routerLink="/docs/zero-css" style="text-decoration:none">

@@ -483,7 +483,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       {
         title: 'Tones',
         description: 'Six matte tones.',
-        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.2.0</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
+        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.2.1</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
       },
     ],
     api: [{ name: 'tone', type: "'lime' | 'neutral' | 'success' | 'warning' | 'danger' | 'info'", default: "'neutral'", description: 'Badge tone.' }],
@@ -590,7 +590,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       {
         title: 'Photo',
         description: 'Provide src to show an image instead of initials.',
-        code: `<na-avatar name="Ada Lovelace" src="/avatar.jpg" />`,
+        code: `<na-avatar\n  name="Ada Lovelace"\n  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Crect width='72' height='72' fill='%23cdea7f'/%3E%3Ctext x='36' y='46' font-family='sans-serif' font-size='28' font-weight='bold' text-anchor='middle' fill='%231a1a1a'%3EAL%3C/text%3E%3C/svg%3E"\n/>`,
       },
     ],
     api: [
