@@ -483,7 +483,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       {
         title: 'Tones',
         description: 'Six matte tones.',
-        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.3.0</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
+        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.3.1</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
       },
     ],
     api: [{ name: 'tone', type: "'lime' | 'neutral' | 'success' | 'warning' | 'danger' | 'info'", default: "'neutral'", description: 'Badge tone.' }],
@@ -702,7 +702,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     name: 'Header',
     selector: 'na-header',
     area: 'Shell',
-    description: 'App top bar with 16px side gutters. Title + subtitle inputs, actions projected.',
+    description: 'App top bar with 16px side gutters. Title + subtitle inputs, actions projected and vertically centered. Stacks below 768px; long titles wrap instead of overflowing.',
     whenToUse: 'Top of every authenticated page or the docs shell.',
     zeroCssRule: 'Use title/subtitle — no header layout CSS. Set maxWidth to align shell content with na-page gutters.',
     demos: [
