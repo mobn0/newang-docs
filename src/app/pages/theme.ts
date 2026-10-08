@@ -37,6 +37,13 @@ import { CodeBlock } from '../shared/code-block';
           linear-gradient, box-shadow (except none), text-shadow and drop-shadow are
           banned by stylelint. Flat elevation via 1px borders; focus is a 2px lime outline.
         </na-alert>
+        <na-alert tone="info" title="Square by default, round on purpose">
+          All corner radii ship as 0. The only round elements are radio dots,
+          switch tracks/thumbs and spinner rings (rotation needs a circle).
+          Everything else — cards, alerts, badges, avatars, progress, inputs,
+          buttons, modals, tooltips — is square. Set --na-radius-sm/md/lg to
+          bring roundness back globally, no SCSS rebuild needed.
+        </na-alert>
       </na-stack>
     </na-page>
   `,
@@ -59,5 +66,5 @@ export class ThemePage {
     { token: '$na-info', value: '#a9c6d4', description: '', use: 'Matte blue' },
     { token: '$na-radius-sm / md / lg', value: '0', description: '', use: 'Square corners everywhere' },
   ];
-  protected readonly override = `@use 'newang/styles' as na with (\n  $na-accent: #d4f08a,\n  $na-bg: #191c19\n);\n@include na.base();`;
+  protected readonly override = `@use 'newang/styles' as na with (\n  $na-accent: #d4f08a,\n  $na-bg: #1a1a1a\n);\n@include na.base();`;
 }

@@ -483,7 +483,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       {
         title: 'Tones',
         description: 'Six matte tones.',
-        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.1.0</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
+        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.2.0</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
       },
     ],
     api: [{ name: 'tone', type: "'lime' | 'neutral' | 'success' | 'warning' | 'danger' | 'info'", default: "'neutral'", description: 'Badge tone.' }],
@@ -702,19 +702,25 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     name: 'Header',
     selector: 'na-header',
     area: 'Shell',
-    description: 'App top bar. Title + subtitle inputs, actions projected.',
+    description: 'App top bar with 16px side gutters. Title + subtitle inputs, actions projected.',
     whenToUse: 'Top of every authenticated page or the docs shell.',
-    zeroCssRule: 'Use title/subtitle — no header layout CSS.',
+    zeroCssRule: 'Use title/subtitle — no header layout CSS. Set maxWidth to align shell content with na-page gutters.',
     demos: [
       {
         title: 'Page header',
-        description: 'Actions slot on the right.',
+        description: 'Actions slot on the right. maxWidth="full" spans the viewport with gutters.',
         code: `<na-header title="Billing" subtitle="Invoices and seats">\n  <na-button variant="primary">Pay now</na-button>\n</na-header>`,
+      },
+      {
+        title: 'Aligned to page',
+        description: 'maxWidth="md" constrains header content to the same width as na-page.',
+        code: `<na-header title="Billing" subtitle="Invoices" maxWidth="md">\n  <na-button variant="primary">Pay now</na-button>\n</na-header>`,
       },
     ],
     api: [
       { name: 'title', type: 'string', default: "''", description: 'Header title.' },
       { name: 'subtitle', type: 'string', default: "''", description: 'Header subtitle.' },
+      { name: 'maxWidth', type: "'sm' | 'md' | 'lg' | 'full'", default: "'full'", description: 'Content width; matches na-page widths.' },
     ],
     donts: [],
   },
@@ -723,9 +729,9 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     name: 'Footer',
     selector: 'na-footer',
     area: 'Shell',
-    description: 'Muted footer bar. Project links and copy inside.',
+    description: 'Muted footer bar with 16px side gutters. Project links and copy inside.',
     whenToUse: 'Bottom of app shell and docs pages.',
-    zeroCssRule: 'Wrap footer content — do not style footers manually.',
+    zeroCssRule: 'Wrap footer content — do not style footers manually. Set maxWidth to align with na-page.',
     demos: [
       {
         title: 'Simple footer',
@@ -733,7 +739,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
         code: `<na-footer>\n  <na-text tone="muted" size="sm">MIT · newAng docs</na-text>\n</na-footer>`,
       },
     ],
-    api: [{ name: '—', type: 'no inputs', default: '—', description: 'Projection-only bar.' }],
+    api: [{ name: 'maxWidth', type: "'sm' | 'md' | 'lg' | 'full'", default: "'full'", description: 'Content width; matches na-page widths.' }],
     donts: [],
   },
   toolbar: {
