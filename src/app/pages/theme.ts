@@ -12,7 +12,9 @@ import { CodeBlock } from '../shared/code-block';
           <na-text tone="muted">
             Dark-only. Neutral charcoal surfaces, pastel lime accent, square corners.
             Tokens live in newang/styles as !default SCSS variables
-            mirrored to --na-* CSS custom properties.
+            mirrored to --na-* CSS custom properties — colors, type, spacing,
+            radii and motion. Everything re-skins at runtime with plain CSS,
+            no SCSS rebuild needed.
           </na-text>
         </na-stack>
         <na-table
@@ -65,6 +67,12 @@ export class ThemePage {
     { token: '$na-warning', value: '#e3c88d', description: '', use: 'Matte amber' },
     { token: '$na-info', value: '#a9c6d4', description: '', use: 'Matte blue' },
     { token: '$na-radius-sm / md / lg', value: '0', description: '', use: 'Square corners everywhere' },
+    { token: '$na-space-xs … --na-space-xl', value: '4 / 8 / 16 / 24 / 32px', description: '', use: 'The only spacing steps (gap inputs)' },
+    { token: '$na-fs-xs … --na-fs-3xl', value: '12 / 13 / 14 / 16 / 18 / 24 / 30px', description: '', use: 'One type ramp — no ad-hoc sizes' },
+    { token: '$na-weight-medium / semibold / bold', value: '500 / 600 / 700', description: '', use: 'The only font weights' },
+    { token: '$na-control-h-sm / md / lg', value: '32 / 40 / 48px', description: '', use: 'Shared by inputs, buttons, tabs, form actions' },
+    { token: '$na-dur', value: '120ms', description: '', use: 'Single transition duration for interactive bits' },
+    { token: '$na-focus-ring / --na-focus-offset', value: '2px lime / 2px', description: '', use: 'Focus outline, everywhere the same' },
   ];
   protected readonly override = `@use 'newang/styles' as na with (\n  $na-accent: #d4f08a,\n  $na-bg: #1a1a1a\n);\n@include na.base();`;
 }

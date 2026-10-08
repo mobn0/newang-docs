@@ -30,7 +30,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     name: 'Button',
     selector: 'na-button',
     area: 'Actions',
-    description: 'Opinionated button. No classes needed — pick a variant and size with inputs.',
+    description: 'Opinionated button. No classes needed — pick a variant and size with inputs. Loading and disabled both render a flat inactive surface; the lime accent is reserved for live primary actions.',
     whenToUse: 'Use for every action: form submits, modal confirmations, toolbar actions, empty-state CTAs.',
     zeroCssRule: 'Never style a <button> by hand. Control everything with variant, size, disabled, loading and fullWidth.',
     demos: [
@@ -101,7 +101,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
     name: 'Form',
     selector: 'na-form',
     area: 'Forms',
-    description: 'Vertical stack plus submit row baked in. Project your na-fields inside.',
+    description: 'Vertical stack plus submit row baked in. Flat layout wrapper with no surface of its own — nesting it in na-card never produces a box inside a box.',
     whenToUse: 'Any data-entry form with a submit (and optional cancel) action.',
     zeroCssRule: 'Do not build form layout with CSS grid by hand — na-form owns the rhythm.',
     demos: [
@@ -483,7 +483,7 @@ export const COMPONENT_DOCS: Record<string, ComponentDoc> = {
       {
         title: 'Tones',
         description: 'Six matte tones.',
-        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.2.1</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
+        code: `<na-row gap="md">\n  <na-badge tone="lime">v1.3.0</na-badge>\n  <na-badge tone="neutral">draft</na-badge>\n  <na-badge tone="success">live</na-badge>\n  <na-badge tone="warning">beta</na-badge>\n  <na-badge tone="danger">down</na-badge>\n  <na-badge tone="info">new</na-badge>\n</na-row>`,
       },
     ],
     api: [{ name: 'tone', type: "'lime' | 'neutral' | 'success' | 'warning' | 'danger' | 'info'", default: "'neutral'", description: 'Badge tone.' }],

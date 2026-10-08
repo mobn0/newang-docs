@@ -35,7 +35,7 @@ import { CodeBlock } from '../shared/code-block';
         <na-stack gap="md">
           <na-row gap="md" align="center">
             <na-heading level="1">newAng</na-heading>
-            <na-badge tone="lime">v1.2.1</na-badge>
+            <na-badge tone="lime">v1.3.0</na-badge>
             <na-badge tone="neutral">dark-only</na-badge>
           </na-row>
           <na-text size="lg" tone="muted">
